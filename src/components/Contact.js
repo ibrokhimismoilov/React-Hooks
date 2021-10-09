@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "../customHooks/useForm";
 
 const initialState = {
@@ -6,10 +6,25 @@ const initialState = {
   email: "",
   text: "",
 };
+
 const Contact = () => {
   const [value, changeHandler] = useForm(initialState);
 
-  console.log(value);
+  useEffect(() => {
+    console.log("DidMount");
+
+    return () => {
+      console.log("WillunMount");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("firstName render");
+  }, [value.firstName, changeHandler]);
+
+  useEffect(() => {
+    console.log("email render");
+  }, [value.email]);
 
   return (
     <form>
@@ -17,16 +32,25 @@ const Contact = () => {
       <input
         type="text"
         name="firstName"
+        placeholder="firstName"
         value={value.firstName}
         onChange={changeHandler}
       />
+      <br />
       <input
         type="email"
         name="email"
+        placeholder="email"
         value={value.email}
         onChange={changeHandler}
       />
-      <textarea name="text" value={value.text} onChange={changeHandler} />
+      <br />
+      <textarea
+        name="text"
+        placeholder="text"
+        value={value.text}
+        onChange={changeHandler}
+      />
     </form>
   );
 };
