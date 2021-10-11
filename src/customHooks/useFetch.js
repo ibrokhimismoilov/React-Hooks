@@ -20,11 +20,9 @@ export const useFetch = (urlNumber) => {
     fetch(`http://numbersapi.com/${urlNumber}`)
       .then((res) => res.text())
       .then((data) => {
-        setTimeout(() => {
-          if (isCurrent.current) {
-            setState({ data: data, loading: false });
-          }
-        }, 2000);
+        if (isCurrent.current) {
+          setState({ data: data, loading: false });
+        }
       });
   }, [urlNumber]);
 

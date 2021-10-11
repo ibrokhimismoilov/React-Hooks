@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useForm } from "../customHooks/useForm";
+import { useMeasure } from "../customHooks/useMeasure";
 
 const initialState = {
   ism: "",
@@ -9,6 +10,8 @@ const Form = () => {
   const [value, handleChange] = useForm(initialState);
 
   const inputRef = useRef(() => console.log("hello world"));
+
+  const [rect, inputRef2] = useMeasure([]);
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ const Form = () => {
   return (
     <form onSubmit={SubmitHandler}>
       <input
+        ref={inputRef2}
         type="text"
         onChange={handleChange}
         placeholder="ism"
@@ -36,6 +40,7 @@ const Form = () => {
         value={value.parol}
         name="parol"
       />
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
       <button>Yuborish</button>
     </form>
   );
