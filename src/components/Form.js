@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "../customHooks/useForm";
 
 const initialState = {
@@ -8,9 +8,16 @@ const initialState = {
 const Form = () => {
   const [value, handleChange] = useForm(initialState);
 
+  const inputRef = useRef(() => console.log("hello world"));
+
   const SubmitHandler = (e) => {
     e.preventDefault();
-    console.log(value);
+    inputRef.current();
+    // if (!value.parol) {
+    //   inputRef.current.focus();
+    // } else {
+    //   console.log(value);
+    // }
   };
 
   return (

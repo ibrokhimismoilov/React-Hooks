@@ -8,6 +8,7 @@ const Product = () => {
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count));
   }, [count]);
+
   return (
     <div>
       <h1>{loading ? "Loading..." : data}</h1>

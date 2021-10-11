@@ -1,14 +1,14 @@
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useState } from "react";
+import Form from "./components/Form";
 import Product from "./components/Product";
 
 const App = () => {
-  const [show, setSHow] = useState(false);
-
+  const [state, setState] = useState(true);
   return (
     <div>
-      {show && <Product />}
-      <button onClick={() => setSHow((prev) => !prev)}>Toggle</button>
+      <Form />
+      {state && <Product />}
+      <button onClick={() => setState((prev) => !prev)}>Toggle</button>
     </div>
   );
 };
