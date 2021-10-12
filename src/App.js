@@ -1,34 +1,32 @@
-import React, { useReducer } from "react";
-import { reducer } from "./reducer";
-import { DECREMENT, INCREMENT } from "./reducer/types";
-
-const initialState = {
-  user: null,
-  isLoggendIn: false,
-};
+import React, { useState } from "react";
+import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
+import { UserContext } from "./context/UserContext";
+import { About } from "./pages/About";
+import { Home } from "./pages/Home";
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [state, setState] = useState(0);
   return (
-    <div>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
-      <button
-        onClick={() =>
-          dispatch({
-            type: INCREMENT,
-            payload: { user: "Ibrokhim", isLoggendIn: true },
-          })
-        }
-      >
-        Login
-      </button>
-      <button
-        onClick={() => dispatch({ type: DECREMENT, payload: initialState })}
-      >
-        Logout
-      </button>
-    </div>
+    <BrowserRouter>
+      <ul>
+        <li>
+          <NavLink exact to="/about">
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to="/">
+            Home
+          </NavLink>
+        </li>
+      </ul>
+      <Switch>
+        <UserContext.Provider value={{ state, setState }}>
+          <Route exact path={"/"} component={Home} />
+          <Route exact path={"/about"} component={About} />
+        </UserContext.Provider>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
