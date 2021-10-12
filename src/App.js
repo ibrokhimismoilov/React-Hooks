@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import Form from "./components/Form";
-import Product from "./components/Product";
+import React, { useCallback, useState } from "react";
+import { Increment } from "./components/Increment";
 
 const App = () => {
-  const [state, setState] = useState(true);
+  const [count, setCount] = useState(0);
+  console.log("App render");
+  const increment = useCallback(
+    (n) => {
+      setCount((p) => p + n);
+    },
+    [setCount]
+  );
+
   return (
     <div>
-      <Form />
-      {state && <Product />}
-      <button onClick={() => setState((prev) => !prev)}>Toggle</button>
+      <h1>{count}</h1>
+      <Increment increment={increment} />
+      <button onClick={() => increment(2)}>inc 2</button>
     </div>
   );
 };
